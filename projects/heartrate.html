@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
-    <title>Image Generator</title>
+    <title>PixelPulse: Heart Rate Detection via Webcam and Fourier Analysis</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
   
@@ -43,19 +43,20 @@
   
             <div class="col-lg-12 portfolio-info">
               <br>
-              <h2 style="color:#12d640">Image Generator</h2>
+              <h2 style="color:#12d640">Heart Rate Estimation via Webcam</h2>
               <ul>
-                <li><strong>Tech Stack</strong>: TJava, NodeJS, Python, HTML, CSS, Javascript, AWS(S3, EC2, SQS)</li>
-                <li><strong>Github URL</strong>: <a href="https://github.com/rajaprerak/image_recognition_as_a_service" target="_blank">Project Link</a></li>
+                  <li><strong>Tech Stack</strong>: Python, OpenCV, NumPy, Matplotlib</li>
+                  <li><strong>Github URL</strong>: <a href="https://github.com/Damien3008/PixelPulse/tree/main" target="_blank">Project Link</a></li>
               </ul>
-  
+              
               <p>
-                Built an elastic web application that automatically scales in and scales out 20 EC2 instances based on the traffic of current users with the help of AWS services. Created custom AMIs to deploy image recognition app on EC2 instance; used SQS to handle request and response.              </p>
+                  In this project, we developed a tool to estimate heart rate using your computer's webcam by tracking the pixel evolution on your forehead over a fixed period. The pixel data is then processed through a Fourier transform to perform frequency analysis, aiming to detect heart rate.
               </p>
+              
               <p>
-                Deployed image recognition system on AWS for the clients to access and successfully tested the application by generating 1000 requests.              </p>
+                  Together with another student, we programmed a solution that outputs an estimated heart rate and visualizes the analysis with detailed graphics. These visualizations include both the heart rate frequency and noise frequencies, which might affect the accuracy of the results due to ambient factors. The code is designed primarily for analyzing the graphs and selecting the best heart rate estimate by distinguishing heart rate peaks from noise peaks.
               </p>
-            </div>
+          </div>
   
           </div>
   
