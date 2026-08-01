@@ -3,111 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Damien Martins Gomes | AI Researcher</title>
+    <title>Damien Martins Gomes — AI Scientist</title>
+    <meta name="description" content="Damien Martins Gomes — AI Scientist at Thales Research &amp; Technology. Speech enhancement, signal processing and deep learning optimization research.">
+    <link rel="icon" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --text-primary: #f0f0f5;
-            --text-secondary: #a0a0b0;
-            --accent: #00d4aa;
-            --accent-dim: rgba(0, 212, 170, 0.15);
-            --gradient-1: #00d4aa;
-            --gradient-2: #0077ff;
-            --gradient-3: #7c3aed;
+            --bg: #05060b;
+            --bg-1: #0a0c16;
+            --panel: rgba(255, 255, 255, 0.035);
+            --panel-solid: #0c0e1a;
+            --border: rgba(255, 255, 255, 0.09);
+            --border-hover: rgba(255, 255, 255, 0.22);
+            --text: #eef0f7;
+            --text-soft: #9aa1b8;
+            --text-faint: #5d6480;
+            --cyan: #35e8cf;
+            --violet: #8a6bff;
+            --magenta: #ff3d94;
+            --gradient: linear-gradient(90deg, var(--cyan), var(--violet), var(--magenta));
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
-        #neural-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; display: block; }
-        .content-wrapper { position: relative; z-index: 1; }
-        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), transparent); backdrop-filter: blur(10px); }
-        .logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 400; letter-spacing: -0.02em; color: var(--text-primary); }
-        .nav-links { display: flex; gap: 3rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.3s ease; }
-        .nav-links a:hover { color: var(--accent); }
-        .social-links { display: flex; gap: 1.5rem; }
-        .social-links a { color: var(--text-secondary); transition: color 0.3s ease; }
-        .social-links a:hover { color: var(--accent); }
-        .social-links svg { width: 20px; height: 20px; }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 8rem 4rem 4rem; position: relative; }
-        .hero-content { max-width: 900px; text-align: center; }
-        .hero-title { font-family: 'Instrument Serif', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 400; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.03em; }
-        .hero-title span { background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2), var(--gradient-3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-subtitle { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem; font-weight: 300; }
-        .hero-tags { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .tag { padding: 0.5rem 1.25rem; background: var(--accent-dim); border: 1px solid rgba(0, 212, 170, 0.3); border-radius: 2rem; font-size: 0.85rem; color: var(--accent); }
-        .scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: ''; position: fixed; inset: 0; z-index: -2;
+            background:
+                radial-gradient(ellipse 60% 40% at 20% 0%, rgba(138, 107, 255, 0.16), transparent 60%),
+                radial-gradient(ellipse 50% 35% at 85% 15%, rgba(255, 61, 148, 0.1), transparent 60%),
+                radial-gradient(ellipse 60% 50% at 50% 100%, rgba(53, 232, 207, 0.08), transparent 60%),
+                var(--bg);
+        }
+        body::after {
+            content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+            background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 0%, transparent 75%);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+        a { color: inherit; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+        .eyebrow::before { content: ''; width: 0.5rem; height: 0.5rem; border: 1px solid var(--cyan); transform: rotate(45deg); display: inline-block; }
+
+        /* Nav */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 200;
+            padding: 1.25rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5, 6, 11, 0.75);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; }
+        .logo span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-soft);
+            font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            transition: color 0.25s ease;
+        }
+        .nav-links a::before { content: '// '; color: var(--text-faint); }
+        .nav-links a:hover { color: var(--cyan); }
+        .social-links { display: flex; gap: 1rem; align-items: center; }
+        .social-links a {
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border); border-radius: 6px; color: var(--text-soft);
+            transition: all 0.25s ease;
+        }
+        .social-links a:hover { color: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 14px rgba(53, 232, 207, 0.35); }
+        .social-links svg { width: 16px; height: 16px; }
+        .nav-toggle {
+            display: none; background: none; border: 1px solid var(--border); border-radius: 6px;
+            width: 38px; height: 38px; cursor: pointer; padding: 0; position: relative;
+        }
+        .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+            content: ''; position: absolute; left: 10px; width: 18px; height: 1.5px; background: var(--text);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+        .nav-toggle span { top: 18px; }
+        .nav-toggle span::before { top: -6px; }
+        .nav-toggle span::after { top: 6px; }
+        .nav-toggle.open span { background: transparent; }
+        .nav-toggle.open span::before { transform: translateY(6px) rotate(45deg); background: var(--cyan); }
+        .nav-toggle.open span::after { transform: translateY(-6px) rotate(-45deg); background: var(--cyan); }
+        .mobile-panel {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 150;
+            background: var(--bg); padding: 7rem 2rem 2rem; flex-direction: column; gap: 0;
+        }
+        .mobile-panel.open { display: flex; }
+        .mobile-panel a {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 500; padding: 1rem 0; text-decoration: none;
+            color: var(--text); border-bottom: 1px solid var(--border);
+        }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8rem 4rem 3rem; position: relative; }
+        .hero-content { max-width: 800px; text-align: center; }
+        .hero-eyebrow { justify-content: center; }
+        .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.75rem, 7vw, 5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .hero-title span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.15rem; color: var(--text-soft); margin-bottom: 2.25rem; max-width: 580px; margin-left: auto; margin-right: auto; }
+        .hero-tags { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+        .tag {
+            padding: 0.4rem 1rem; background: rgba(138, 107, 255, 0.08); border: 1px solid rgba(138, 107, 255, 0.35);
+            border-radius: 100px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.03em; color: #c9befe;
+        }
+        .spectrogram-wrap { width: 100%; max-width: 920px; margin-top: 3.5rem; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; background: var(--panel); backdrop-filter: blur(10px); }
+        #spectrogram { width: 100%; height: 150px; display: block; border-radius: 4px; }
+        .waveform-caption {
+            display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.66rem; letter-spacing: 0.08em; color: var(--text-faint); text-transform: uppercase; margin-top: 0.7rem;
+        }
+        .waveform-caption span:last-child { color: var(--cyan); }
+        .scroll-indicator {
+            margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            color: var(--text-faint); font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+            animation: bounce 2.2s infinite;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-8px); } 60% { transform: translateY(-4px); } }
+
         section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
-        .section-title { font-family: 'Instrument Serif', serif; font-size: 2.5rem; margin-bottom: 3rem; position: relative; display: inline-block; }
-        .section-title::after { content: ''; position: absolute; bottom: -0.5rem; left: 0; width: 3rem; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
-        .about-content { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
-        .profile-image { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .bio p { margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 1.05rem; }
-        .bio p:first-of-type::first-letter { font-family: 'Instrument Serif', serif; font-size: 3.5rem; float: left; line-height: 1; margin-right: 0.5rem; color: var(--accent); }
-        .interests { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem; }
-        .interest-tag { padding: 0.4rem 1rem; background: var(--bg-secondary); border-radius: 0.5rem; font-size: 0.85rem; color: var(--text-secondary); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .education-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-        .education-card { background: var(--bg-secondary); border-radius: 1rem; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .education-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
-        .education-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent); }
-        .education-card .degree { font-weight: 500; margin-bottom: 0.25rem; }
-        .education-card .date { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
-        .education-card .gpa { display: inline-block; padding: 0.25rem 0.75rem; background: var(--accent-dim); border-radius: 0.25rem; font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; }
-        .education-card .distinction { font-style: italic; color: var(--text-secondary); font-size: 0.9rem; }
-        .coursework { margin-top: 1.5rem; }
-        .coursework h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 0.75rem; }
+        .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 2.25rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 3rem; }
+
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+        /* About */
+        .about-content { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: start; }
+        .profile-frame { position: relative; border-radius: 10px; padding: 6px; background: var(--gradient); }
+        .profile-image { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 7px; display: block; background: var(--bg); }
+        .bio p { margin-bottom: 1.4rem; color: var(--text-soft); font-size: 1.02rem; }
+        .bio p:first-of-type::first-letter { font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 600; float: left; line-height: 0.85; margin-right: 0.5rem; margin-top: 0.3rem; color: var(--cyan); }
+        .interests { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.75rem; }
+        .interest-tag {
+            padding: 0.35rem 0.85rem; background: var(--panel); border-radius: 100px; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; color: var(--text-soft); border: 1px solid var(--border);
+        }
+
+        /* Education */
+        .education-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+        .panel {
+            background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 2rem;
+            backdrop-filter: blur(10px); position: relative; overflow: hidden; transition: border-color 0.3s ease;
+        }
+        .panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gradient); opacity: 0.7; }
+        .panel:hover { border-color: var(--border-hover); }
+        .panel-header {
+            display: flex; justify-content: space-between; align-items: baseline; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.9rem;
+            border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+        }
+        .education-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .education-card .degree { font-weight: 500; margin-bottom: 0.25rem; font-size: 0.98rem; }
+        .education-card .date { color: var(--text-faint); font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; margin-bottom: 1rem; }
+        .gpa-badge { display: inline-block; padding: 0.25rem 0.7rem; background: rgba(53, 232, 207, 0.1); border: 1px solid rgba(53, 232, 207, 0.35); border-radius: 100px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--cyan); margin-bottom: 1rem; }
+        .distinction { font-style: italic; color: var(--text-soft); font-size: 0.9rem; margin-bottom: 1.25rem; }
+        .coursework h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 0.6rem; }
         .coursework ul { list-style: none; }
-        .coursework li { padding: 0.3rem 0; color: var(--text-secondary); font-size: 0.9rem; position: relative; padding-left: 1rem; }
-        .coursework li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
-        .experience-timeline { position: relative; padding-left: 2rem; }
-        .experience-timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), transparent); }
+        .coursework li { padding: 0.25rem 0; color: var(--text-soft); font-size: 0.9rem; position: relative; padding-left: 1.1rem; }
+        .coursework li::before { content: '›'; position: absolute; left: 0; color: var(--cyan); font-weight: 600; }
+
+        /* Experience */
+        .experience-timeline { position: relative; padding-left: 2.25rem; }
+        .experience-timeline::before {
+            content: ''; position: absolute; left: 4px; top: 6px; bottom: 0; width: 1px;
+            background: linear-gradient(to bottom, var(--cyan), var(--violet) 50%, transparent);
+            opacity: 0.5;
+        }
         .experience-item { position: relative; padding-bottom: 3rem; }
-        .experience-item::before { content: ''; position: absolute; left: -2rem; top: 0.5rem; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; transform: translateX(-4px); }
-        .experience-item h3 { font-family: 'Instrument Serif', serif; font-size: 1.5rem; margin-bottom: 0.25rem; }
-        .experience-item h3 a { color: var(--accent); text-decoration: none; transition: opacity 0.3s ease; }
-        .experience-item h3 a:hover { opacity: 0.8; }
-        .experience-item .role { font-weight: 500; color: var(--text-primary); margin-bottom: 0.25rem; }
-        .experience-item .date { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+        .experience-item::before {
+            content: ''; position: absolute; left: -2.25rem; top: 0.4rem; width: 9px; height: 9px; border-radius: 50%;
+            background: var(--cyan); box-shadow: 0 0 10px rgba(53, 232, 207, 0.7);
+        }
+        .experience-item h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .experience-item h3 a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--violet); transition: opacity 0.25s ease; }
+        .experience-item h3 a:hover { opacity: 0.7; }
+        .experience-item .role { font-weight: 600; color: var(--text); margin-bottom: 0.2rem; font-size: 0.98rem; }
+        .experience-item .date { color: var(--text-faint); font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.04em; }
         .experience-item ul { list-style: none; }
-        .experience-item li { padding: 0.4rem 0; color: var(--text-secondary); font-size: 0.95rem; position: relative; padding-left: 1.25rem; }
-        .experience-item li::before { content: '•'; position: absolute; left: 0; color: var(--accent); }
-        .research-card { display: grid; grid-template-columns: 300px 1fr; gap: 3rem; background: var(--bg-secondary); border-radius: 1rem; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.05); align-items: center; }
-        .research-image { width: 100%; border-radius: 0.5rem; }
-        .research-content h3 { font-family: 'Instrument Serif', serif; font-size: 1.75rem; margin-bottom: 1rem; }
-        .research-content .venue { display: inline-block; padding: 0.25rem 0.75rem; background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2)); border-radius: 0.25rem; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; color: var(--bg-primary); }
-        .research-content p { color: var(--text-secondary); margin-bottom: 1.5rem; }
-        .research-links { display: flex; gap: 1rem; }
-        .research-links a { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: transparent; border: 1px solid var(--accent); border-radius: 0.5rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; }
-        .research-links a:hover { background: var(--accent); color: var(--bg-primary); }
-        .awards-list { display: flex; flex-direction: column; gap: 1.5rem; }
-        .award-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 1.5rem; background: var(--bg-secondary); border-radius: 0.75rem; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .award-info h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
-        .award-info p { color: var(--text-secondary); font-size: 0.9rem; }
-        .award-amount { font-family: 'Instrument Serif', serif; font-size: 1.25rem; color: var(--accent); }
+        .experience-item li { padding: 0.35rem 0; color: var(--text-soft); font-size: 0.95rem; position: relative; padding-left: 1.2rem; }
+        .experience-item li::before { content: '—'; position: absolute; left: 0; color: var(--text-faint); }
+
+        /* Research */
+        .research-featured {
+            display: grid; grid-template-columns: 320px 1fr; gap: 3rem; align-items: center; margin-bottom: 3rem;
+            padding: 2rem; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); backdrop-filter: blur(10px);
+        }
+        .research-image { width: 100%; border-radius: 6px; border: 1px solid var(--border); }
+        .venue-tag {
+            display: inline-block; padding: 0.3rem 0.8rem; background: var(--gradient);
+            border-radius: 100px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em;
+            margin-bottom: 1rem; color: #05060b; text-transform: uppercase;
+        }
+        .research-content h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; line-height: 1.25; }
+        .research-content p { color: var(--text-soft); margin-bottom: 1.5rem; font-size: 0.98rem; }
+        .research-links { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+        .research-links a {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.1rem; background: transparent;
+            border: 1px solid var(--cyan); border-radius: 6px; color: var(--cyan); text-decoration: none;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; transition: all 0.25s ease;
+        }
+        .research-links a:hover { background: var(--cyan); color: #05060b; box-shadow: 0 0 20px rgba(53, 232, 207, 0.4); }
+
+        .pub-list { display: flex; flex-direction: column; }
+        .pub-row {
+            display: grid; grid-template-columns: 170px 1fr auto; gap: 1.5rem; align-items: start;
+            padding: 1.5rem; border: 1px solid transparent; border-bottom: 1px solid var(--border); border-radius: 8px;
+            transition: border-color 0.25s ease, background 0.25s ease;
+        }
+        .pub-row:hover { background: var(--panel); border-color: var(--border); }
+        .pub-venue { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.03em; color: var(--violet); text-transform: uppercase; padding-top: 0.2rem; }
+        .pub-body h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.15rem; margin-bottom: 0.4rem; line-height: 1.3; }
+        .pub-body p { color: var(--text-soft); font-size: 0.9rem; }
+        .pub-link {
+            display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: none; color: var(--text-soft);
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; white-space: nowrap; border-bottom: 1px solid transparent;
+            transition: color 0.25s ease, border-color 0.25s ease;
+        }
+        .pub-link:hover { color: var(--cyan); border-color: var(--cyan); }
+
+        /* Awards */
+        .awards-list { display: flex; flex-direction: column; }
+        .award-item { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1.35rem 1.25rem; border-bottom: 1px solid var(--border); border-radius: 8px; transition: background 0.25s ease; }
+        .award-item:hover { background: var(--panel); }
+        .award-info h4 { font-size: 1.02rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .award-info p { color: var(--text-faint); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .award-amount { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.35rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap; }
+
+        /* Playground / earlier builds */
+        .playground-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .play-card {
+            display: block; padding: 1.5rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none;
+            color: var(--text); background: var(--panel); backdrop-filter: blur(10px); transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .play-card:hover { border-color: var(--cyan); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(53, 232, 207, 0.08); }
+        .play-card .play-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 0.6rem; display: block; }
+        .play-card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .play-card p { color: var(--text-soft); font-size: 0.85rem; }
+
+        /* Contact */
         .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+        .contact-info { display: flex; flex-direction: column; gap: 1.75rem; }
         .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
-        .contact-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--accent-dim); border-radius: 0.5rem; color: var(--accent); }
-        .contact-item h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 0.25rem; }
-        .contact-item p, .contact-item a { color: var(--text-primary); text-decoration: none; }
-        .contact-social { display: flex; gap: 1rem; margin-top: 1rem; }
-        .contact-social a { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 0.5rem; color: var(--text-secondary); transition: all 0.3s ease; }
-        .contact-social a:hover { background: var(--accent); color: var(--bg-primary); border-color: var(--accent); }
-        footer { text-align: center; padding: 3rem; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        @media (max-width: 968px) { nav { padding: 1rem 2rem; } .nav-links { display: none; } section { padding: 4rem 2rem; } .about-content { grid-template-columns: 1fr; gap: 2rem; } .profile-image { max-width: 300px; margin: 0 auto; } .education-grid { grid-template-columns: 1fr; } .research-card { grid-template-columns: 1fr; } .contact-content { grid-template-columns: 1fr; } }
-        @media (max-width: 480px) { .hero { padding: 6rem 1.5rem 3rem; } .hero-tags { flex-direction: column; align-items: center; } .award-item { flex-direction: column; gap: 0.5rem; } }
+        .contact-icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 8px; color: var(--cyan); flex-shrink: 0; background: var(--panel); }
+        .contact-item h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 0.3rem; }
+        .contact-item p, .contact-item a { color: var(--text); text-decoration: none; font-size: 0.98rem; }
+        .connect-label { color: var(--text-faint); font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; display: block; }
+        .contact-social { display: flex; gap: 0.85rem; }
+        .contact-social a { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; color: var(--text-soft); transition: all 0.25s ease; }
+        .contact-social a:hover { color: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 20px rgba(53, 232, 207, 0.3); }
+
+        footer { text-align: center; padding: 2.5rem; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; border-top: 1px solid var(--border); }
+
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+        @media (max-width: 968px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            section { padding: 4rem 1.75rem; }
+            .hero { padding: 7rem 1.75rem 3rem; }
+            .about-content { grid-template-columns: 1fr; gap: 2rem; }
+            .profile-frame { max-width: 240px; margin: 0 auto; }
+            .education-grid { grid-template-columns: 1fr; }
+            .research-featured { grid-template-columns: 1fr; }
+            .pub-row { grid-template-columns: 1fr; gap: 0.5rem; }
+            .contact-content { grid-template-columns: 1fr; }
+            .playground-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero-tags { flex-direction: column; align-items: center; }
+            .award-item { flex-direction: column; gap: 0.4rem; }
+            .playground-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <canvas id="neural-bg"></canvas>
-    <div class="content-wrapper">
     <nav>
-        <div class="logo">DMG</div>
+        <div class="logo">DMG<span>_</span></div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#education">Education</a></li>
@@ -120,41 +317,61 @@
             <a href="https://github.com/Damien3008" target="_blank" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
             <a href="https://scholar.google.com/citations?view_op=list_works&hl=fr&hl=fr&user=ivIgsbMAAAAJ" target="_blank" aria-label="Google Scholar"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></a>
         </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
     </nav>
+
+    <div class="mobile-panel" id="mobilePanel">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact</a>
+    </div>
+
     <section class="hero">
         <div class="hero-content">
+            <div class="eyebrow hero-eyebrow">AI Scientist — Thales Research &amp; Technology</div>
             <h1 class="hero-title">Damien <span>Martins Gomes</span></h1>
-            <p class="hero-subtitle">AI Scientist @ Thales</p>
+            <p class="hero-subtitle">I build speech and audio models that hold up on real hardware, under real constraints — turning degraded signals into intelligence, one waveform at a time.</p>
             <div class="hero-tags">
+                <span class="tag">Speech Enhancement</span>
+                <span class="tag">Signal Processing</span>
                 <span class="tag">Deep Learning</span>
                 <span class="tag">Optimization</span>
-                <span class="tag">Signal Processing</span>
-                <span class="tag">Speech Processing</span>
+            </div>
+        </div>
+        <div class="spectrogram-wrap">
+            <canvas id="spectrogram"></canvas>
+            <div class="waveform-caption">
+                <span>Live signal — synthetic mel-spectrogram</span>
+                <span>Neural speech enhancement</span>
             </div>
         </div>
         <div class="scroll-indicator">
             <span>Scroll</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
         </div>
     </section>
-    <section id="about">
-        <h2 class="section-title">About</h2>
+
+    <section id="about" class="reveal">
+        <div class="eyebrow">About</div>
+        <h2 class="section-title">Who I am</h2>
         <div class="about-content">
-            <img src="assets/img/me.jpg" alt="Damien Martins Gomes" class="profile-image">
+            <div class="profile-frame">
+                <img src="assets/img/me.jpg" alt="Damien Martins Gomes" class="profile-image">
+            </div>
             <div class="bio">
                 <p>
-                AI Scientist at Thales Research & Technology, I work at the intersection of deep learning and signal processing, designing intelligent audio systems under real-world constraints.
+                AI Scientist at Thales Research &amp; Technology, I work at the intersection of deep learning and signal processing, designing intelligent audio systems under real-world constraints.
                 My research spans speech enhancement, embedded and real-time models, as well as generative audio systems where efficiency, robustness, and reliability are critical.
                 </p>
-
                 <p>
                 I recently completed a research master's degree in Computer Science at Concordia University, alongside a dual degree in Aerospace Engineering specialized in Telecommunications at IPSA Toulouse.
                 This interdisciplinary background allows me to bridge physical systems, signal processing, and modern machine learning to tackle complex, high-impact problems.
                 </p>
-
                 <p>
                 Previously at Mila – Quebec AI Institute, I developed AdaFisher, a second-order optimization algorithm accepted at ICLR 2025.
-                Driven by curiosity and a strong research mindset, I enjoy turning raw signals into intelligent systems and exploring how AI can robustly perceive and understand the world—one waveform at a time.
+                Driven by curiosity and a strong research mindset, I enjoy turning raw signals into intelligent systems and exploring how AI can robustly perceive and understand the world.
                 </p>
                 <div class="interests">
                     <span class="interest-tag">Machine Learning</span>
@@ -165,14 +382,17 @@
             </div>
         </div>
     </section>
-    <section id="education">
+
+    <section id="education" class="reveal">
+        <div class="eyebrow">Education</div>
         <h2 class="section-title">Education</h2>
         <div class="education-grid">
-            <div class="education-card">
+            <div class="panel education-card">
+                <div class="panel-header"><span>Concordia University</span><span>Montreal, CA</span></div>
                 <h3>Concordia University</h3>
                 <p class="degree">MCompSc: Master of Research in Optimization and Machine Learning</p>
-                <p class="date">September 2023 — April 2025</p>
-                <span class="gpa">CGPA: 4.1/4.3</span>
+                <p class="date">SEP 2023 — APR 2025</p>
+                <span class="gpa-badge">CGPA 4.1 / 4.3</span>
                 <p class="distinction">Thesis awarded with "Outstanding" distinction</p>
                 <div class="coursework">
                     <h4>Relevant Coursework</h4>
@@ -184,11 +404,12 @@
                     </ul>
                 </div>
             </div>
-            <div class="education-card">
+            <div class="panel education-card">
+                <div class="panel-header"><span>IPSA Toulouse</span><span>Toulouse, FR</span></div>
                 <h3>IPSA Toulouse, France</h3>
                 <p class="degree">MSc in Aerospace Engineering: Embedded Systems and Signal Processing</p>
-                <p class="date">September 2019 — April 2025</p>
-                <span class="gpa">CGPA: 3.8/4.0</span>
+                <p class="date">SEP 2019 — APR 2025</p>
+                <span class="gpa-badge">CGPA 3.8 / 4.0</span>
                 <p class="distinction">Obtained with "Outstanding" distinction</p>
                 <div class="coursework">
                     <h4>Relevant Coursework</h4>
@@ -202,10 +423,12 @@
             </div>
         </div>
     </section>
-    <section id="experience">
+
+    <section id="experience" class="reveal">
+        <div class="eyebrow">Experience</div>
         <h2 class="section-title">Experience</h2>
         <div class="experience-timeline">
-          <div class="experience-item">
+            <div class="experience-item">
                 <h3><a href="https://www.thalesgroup.com/en" target="_blank">Thales</a></h3>
                 <p class="role">AI Scientist</p>
                 <p class="date">May 2025 — Now</p>
@@ -262,14 +485,16 @@
             </div>
         </div>
     </section>
-    <section id="research">
-        <h2 class="section-title">Research</h2>
 
-        <!-- AdaFisher -->
-        <div class="research-card">
+    <section id="research" class="reveal">
+        <div class="eyebrow">Research</div>
+        <h2 class="section-title">Publications</h2>
+
+        <!-- AdaFisher — featured -->
+        <div class="research-featured">
             <img src="assets/img/certification/AdaFihser.png" alt="AdaFisher Research" class="research-image">
             <div class="research-content">
-                <span class="venue">ICLR 2025 · Main Conference</span>
+                <span class="venue-tag">ICLR 2025 · Main Conference</span>
                 <h3>AdaFisher: Adaptive Second-Order Optimization via Fisher Information</h3>
                 <p>
                     We propose AdaFisher, a novel second-order optimizer that integrates Fisher information into the Adam family.
@@ -278,71 +503,65 @@
                 </p>
                 <div class="research-links">
                     <a href="https://github.com/AtlasAnalyticsLab/AdaFisher" target="_blank">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                         GitHub
                     </a>
                     <a href="https://openreview.net/forum?id=puTxuiK2qO" target="_blank">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                         OpenReview
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Master Thesis -->
-        <div class="research-card">
-            <img src="assets/img/certification/Thesis_image.png" alt="Master Thesis" class="research-image">
-            <div class="research-content">
-                <span class="venue">Master Thesis</span>
-                <h3>
-                    Towards Practical Second-Order Optimizers in Deep Learning:
-                    Insights from Fisher Information
-                </h3>
-                <p>
-                    This thesis investigates the dynamics of deep learning optimization and the trade-offs between convergence speed,
-                    stability, and computational efficiency.
-                    It provides a unified analysis of zeroth-, first-, and second-order optimization methods, with a particular focus
-                    on curvature-aware approaches.
-                    The work culminates in a detailed theoretical and empirical study of AdaFisher, the optimizer introduced in my ICLR 2025 paper.
-                </p>
-                <div class="research-links">
-                    <a href="https://arxiv.org/abs/2504.20096" target="_blank">
-                        📄 Manuscript
-                    </a>
+        <!-- Publication list -->
+        <div class="pub-list">
+            <div class="pub-row">
+                <span class="pub-venue">Preprint · 2025</span>
+                <div class="pub-body">
+                    <h4>BDN: Blaschke Decomposition Networks</h4>
+                    <p>A neural architecture that iteratively "unwinds" real- and complex-valued 1-D and 2-D signals into interpretable oscillatory components via the Blaschke decomposition, demonstrated on ECG and phase holographic microscopy data.</p>
                 </div>
+                <a class="pub-link" href="https://openreview.net/pdf?id=UMu4JPQxti" target="_blank">Paper →</a>
             </div>
-        </div>
-
-        <!-- BDN -->
-        <div class="research-card">
-            <img src="assets/img/certification/BDN.png" alt="Research Paper" class="research-image">
-            <div class="research-content">
-                <span class="venue">Target: NeurIPS 2026</span>
-                <h3>BDN: Blaschke Decomposition Networks</h3>
-                <p>
-                    We introduce Blaschke Decomposition Networks (BDNs), a novel neural architecture for learning from continuous
-                    real-valued and complex-valued 1-D and 2-D signals—data modalities that are poorly matched to conventional
-                    transformers, convolutional, or recurrent networks.
-                    BDNs leverage the Blaschke decomposition to iteratively “unwind” a signal into interpretable oscillatory components
-                    defined by its roots in the complex unit disk.
-                    The network is trained to predict these roots directly, yielding compact, interpretable representations.
-                    We extend the framework from 1-D signals to 2-D data via a wedge-based factorization.
-                    Experiments on biomedical sensor data, including electrocardiograms and phase holographic microscopy,
-                    demonstrate strong predictive performance with significantly fewer parameters than existing architectures.
-                </p>
-                <div class="research-links">
-                    <a href="https://openreview.net/pdf?id=UMu4JPQxti" target="_blank">📘 Paper</a>
+            <div class="pub-row">
+                <span class="pub-venue">arXiv · 2026</span>
+                <div class="pub-body">
+                    <h4>BASENet: Band-Adapted Speech Enhancement Network with Cross-Band Attention</h4>
+                    <p>A Bark-scale, band-adapted architecture with cross-band attention for real-time speech enhancement — PESQ 3.55 / STOI 96% on VoiceBank+DEMAND with only 0.83M parameters, the fewest among methods at that quality bar.</p>
                 </div>
+                <a class="pub-link" href="https://arxiv.org/abs/2606.12662" target="_blank">arXiv →</a>
+            </div>
+            <div class="pub-row">
+                <span class="pub-venue">MobiSys 2026 · Paper</span>
+                <div class="pub-body">
+                    <h4>Design and Deployment of Lightweight Neural Speech Enhancement and AI Codecs on GAP9 for Ultra-Low-Bitrate Edge Communication</h4>
+                    <p>With C.B. Huynh, R. Lampe, M. De Closets, F. Sausset, S. Lorin. On-device neural speech enhancement and codecs running on the GAP9 embedded processor for ultra-low-bitrate edge communication.</p>
+                </div>
+                <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3812836.3814786" target="_blank">ACM DL →</a>
+            </div>
+            <div class="pub-row">
+                <span class="pub-venue">MobiSys 2026 · Demo</span>
+                <div class="pub-body">
+                    <h4>VoxClean — AI-Powered Speech Enhancement for Tactical and Mobile Communication Pipelines</h4>
+                    <p>With S. Lorin. A deployed speech enhancement pipeline for tactical and mobile communications, presented as a demo at the 24th ACM International Conference on Mobile Systems, Applications, and Services.</p>
+                </div>
+                <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3812836.3814796" target="_blank">ACM DL →</a>
+            </div>
+            <div class="pub-row">
+                <span class="pub-venue">Master's Thesis · 2025</span>
+                <div class="pub-body">
+                    <h4>Towards Practical Second-Order Optimizers in Deep Learning: Insights from Fisher Information</h4>
+                    <p>A unified analysis of zeroth-, first-, and second-order optimization methods, culminating in a detailed theoretical and empirical study of AdaFisher.</p>
+                </div>
+                <a class="pub-link" href="https://arxiv.org/abs/2504.20096" target="_blank">Manuscript →</a>
             </div>
         </div>
     </section>
-    <section id="awards">
-        <h2 class="section-title">Honors & Awards</h2>
+
+    <section id="awards" class="reveal">
+        <div class="eyebrow">Honors</div>
+        <h2 class="section-title">Honors &amp; Awards</h2>
         <div class="awards-list">
             <div class="award-item">
                 <div class="award-info">
@@ -367,19 +586,53 @@
             </div>
         </div>
     </section>
-    <section id="contact">
-        <h2 class="section-title">Contact</h2>
+
+    <section id="playground" class="reveal">
+        <div class="eyebrow">Archive</div>
+        <h2 class="section-title">Earlier Builds</h2>
+        <div class="playground-grid">
+            <a class="play-card" href="projects/nbodies.html" target="_blank">
+                <span class="play-tag">Numerical Methods</span>
+                <h4>N-Bodies Problem</h4>
+                <p>Analytical &amp; numerical study of the N-body problem, applied to Voyager 2's trajectory.</p>
+            </a>
+            <a class="play-card" href="projects/heatequation.html" target="_blank">
+                <span class="play-tag">PDE Simulation</span>
+                <h4>HeatWave</h4>
+                <p>Numerical solution of the heat equation in one and two dimensions.</p>
+            </a>
+            <a class="play-card" href="projects/heartrate.html" target="_blank">
+                <span class="play-tag">Signal Processing</span>
+                <h4>PixelPulse</h4>
+                <p>Webcam-based heart rate detection via Fourier analysis of forehead pixel intensity.</p>
+            </a>
+            <a class="play-card" href="projects/LinguaNet.html" target="_blank">
+                <span class="play-tag">Sequence Modeling</span>
+                <h4>LinguaNet</h4>
+                <p>Encoder/decoder neural machine translation from English to German in TensorFlow.</p>
+            </a>
+            <a class="play-card" href="projects/riskgame.html" target="_blank">
+                <span class="play-tag">Systems / C++</span>
+                <h4>ConquerZone</h4>
+                <p>A Warzone-compatible implementation of Risk, built in C++.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <div class="eyebrow">Contact</div>
+        <h2 class="section-title">Get in touch</h2>
         <div class="contact-content">
             <div class="contact-info">
                 <div class="contact-item">
-                    <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
                     <div>
                         <h4>Location</h4>
-                        <p>Thales Research & Technology<br>1 Avenue Augustin Fresnel<br>Palaiseau, 91120, France</p>
+                        <p>Thales Research &amp; Technology<br>1 Avenue Augustin Fresnel<br>Palaiseau, 91120, France</p>
                     </div>
                 </div>
                 <div class="contact-item">
-                    <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                    <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
                     <div>
                         <h4>Email</h4>
                         <a href="mailto:damien.martins.gomes@gmail.com">damien.martins.gomes@gmail.com</a>
@@ -387,145 +640,151 @@
                 </div>
             </div>
             <div>
-                <h4 style="color: var(--text-secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Connect</h4>
+                <span class="connect-label">Connect</span>
                 <div class="contact-social">
-                    <a href="https://www.linkedin.com/in/damien-martins-gomes/" target="_blank" aria-label="LinkedIn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-                    <a href="https://github.com/Damien3008" target="_blank" aria-label="GitHub"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-                    <a href="https://scholar.google.com/citations?view_op=list_works&hl=fr&hl=fr&user=ivIgsbMAAAAJ" target="_blank" aria-label="Google Scholar"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></a>
+                    <a href="https://www.linkedin.com/in/damien-martins-gomes/" target="_blank" aria-label="LinkedIn"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="https://github.com/Damien3008" target="_blank" aria-label="GitHub"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                    <a href="https://scholar.google.com/citations?view_op=list_works&hl=fr&hl=fr&user=ivIgsbMAAAAJ" target="_blank" aria-label="Google Scholar"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></a>
                 </div>
             </div>
         </div>
     </section>
+
     <footer>
         <p>© 2026 Damien Martins Gomes. All rights reserved.</p>
     </footer>
-    </div>
 
     <script>
     (function() {
-        var canvas = document.getElementById('neural-bg');
+        // Hero signature: a synthetic scrolling mel-spectrogram, standing in for
+        // "speech signal in / enhanced signal out" — the core of Damien's research.
+        var canvas = document.getElementById('spectrogram');
         var ctx = canvas.getContext('2d');
-        var width, height, nodes = [], mouseX = 0, mouseY = 0, time = 0;
-        var nodeCount = 80, connectionDistance = 150, nodeSpeed = 0.3;
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var width, height, rows = 56;
 
-        function Node() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * nodeSpeed;
-            this.vy = (Math.random() - 0.5) * nodeSpeed;
-            this.radius = Math.random() * 2 + 1;
+        var stops = [
+            [0.00, [5, 6, 11]],
+            [0.30, [42, 22, 92]],
+            [0.55, [138, 107, 255]],
+            [0.75, [255, 61, 148]],
+            [1.00, [53, 232, 207]]
+        ];
+        function colorAt(v) {
+            v = Math.max(0, Math.min(1, v));
+            for (var i = 0; i < stops.length - 1; i++) {
+                var a = stops[i], b = stops[i + 1];
+                if (v >= a[0] && v <= b[0]) {
+                    var f = (v - a[0]) / (b[0] - a[0]);
+                    var r = Math.round(a[1][0] + (b[1][0] - a[1][0]) * f);
+                    var g = Math.round(a[1][1] + (b[1][1] - a[1][1]) * f);
+                    var bl = Math.round(a[1][2] + (b[1][2] - a[1][2]) * f);
+                    return 'rgb(' + r + ',' + g + ',' + bl + ')';
+                }
+            }
+            return 'rgb(53,232,207)';
         }
-        Node.prototype.update = function() {
-            this.x += this.vx;
-            this.y += this.vy;
-            if (this.x < 0 || this.x > width) this.vx *= -1;
-            if (this.y < 0 || this.y > height) this.vy *= -1;
-            var dx = mouseX - this.x, dy = mouseY - this.y;
-            var dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 100) { this.x -= dx * 0.02; this.y -= dy * 0.02; }
-        };
-        Node.prototype.draw = function() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#00d4aa';
-            ctx.fill();
-        };
 
-        function init() {
-            resize();
-            nodes = [];
-            for (var i = 0; i < nodeCount; i++) nodes.push(new Node());
-            animate();
-        }
         function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
+            var rect = canvas.getBoundingClientRect();
+            width = Math.max(1, Math.floor(rect.width));
+            height = Math.max(1, Math.floor(rect.height));
             canvas.width = width;
             canvas.height = height;
         }
-        function drawConnections() {
-            for (var i = 0; i < nodes.length; i++) {
-                for (var j = i + 1; j < nodes.length; j++) {
-                    var dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
-                    var dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < connectionDistance) {
-                        var opacity = (1 - dist / connectionDistance) * 0.2;
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = 'rgba(0, 212, 170, ' + opacity + ')';
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
+
+        var formants = [
+            { base: 0.18, sway: 0.05, speed: 0.6 },
+            { base: 0.42, sway: 0.08, speed: 0.9 },
+            { base: 0.68, sway: 0.06, speed: 0.4 }
+        ];
+
+        function columnValues(t) {
+            var vals = new Array(rows);
+            var envelope = 0.35 + 0.65 * Math.max(0, Math.sin(t * 1.3));
+            for (var j = 0; j < rows; j++) {
+                var freq = j / rows;
+                var energy = 0.05;
+                for (var f = 0; f < formants.length; f++) {
+                    var fm = formants[f];
+                    var center = fm.base + Math.sin(t * fm.speed + f) * fm.sway;
+                    var dist = Math.abs(freq - center);
+                    energy += Math.exp(-dist * dist * 90) * 0.9;
+                }
+                var noise = Math.sin(j * 12.9898 + t * 30) * 0.5 + 0.5;
+                energy = energy * envelope + noise * 0.04;
+                vals[j] = Math.min(1, energy);
+            }
+            return vals;
+        }
+
+        var t = 0;
+        function step() {
+            t += 0.045;
+            // shift existing image left by 2px
+            ctx.drawImage(canvas, 2, 0, width - 2, height, 0, 0, width - 2, height);
+            var vals = columnValues(t);
+            var bandH = height / rows;
+            for (var j = 0; j < rows; j++) {
+                ctx.fillStyle = colorAt(vals[j]);
+                ctx.fillRect(width - 2, height - (j + 1) * bandH, 2, Math.ceil(bandH) + 1);
+            }
+            if (!reduceMotion) requestAnimationFrame(step);
+        }
+
+        function fillStatic() {
+            for (var x = 0; x < width; x += 2) {
+                var vals = columnValues(x * 0.04);
+                var bandH = height / rows;
+                for (var j = 0; j < rows; j++) {
+                    ctx.fillStyle = colorAt(vals[j]);
+                    ctx.fillRect(x, height - (j + 1) * bandH, 2, Math.ceil(bandH) + 1);
                 }
             }
         }
-        function drawSignalWaves() {
-            var waves = [
-                { r: 0, g: 119, b: 255, alpha: 0.3, amplitude: 40, frequency: 0.008, speed: 0.5, yOffset: 0.3 },
-                { r: 124, g: 58, b: 237, alpha: 0.2, amplitude: 30, frequency: 0.012, speed: 0.7, yOffset: 0.5 },
-                { r: 0, g: 212, b: 170, alpha: 0.15, amplitude: 25, frequency: 0.006, speed: 0.3, yOffset: 0.7 }
-            ];
-            for (var w = 0; w < waves.length; w++) {
-                var wave = waves[w], baseY = height * wave.yOffset;
-                ctx.beginPath();
-                ctx.moveTo(0, baseY);
-                for (var x = 0; x <= width; x += 2) {
-                    var y = baseY + Math.sin(x * wave.frequency + time * wave.speed) * wave.amplitude + Math.sin(x * wave.frequency * 2 + time * wave.speed * 1.5) * (wave.amplitude * 0.3);
-                    ctx.lineTo(x, y);
-                }
-                ctx.strokeStyle = 'rgba(' + wave.r + ', ' + wave.g + ', ' + wave.b + ', ' + wave.alpha + ')';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                ctx.lineTo(width, height);
-                ctx.lineTo(0, height);
-                ctx.closePath();
-                ctx.fillStyle = 'rgba(' + wave.r + ', ' + wave.g + ', ' + wave.b + ', ' + (wave.alpha * 0.1) + ')';
-                ctx.fill();
-            }
+
+        window.addEventListener('resize', function() { resize(); if (reduceMotion) fillStatic(); });
+        resize();
+        ctx.fillStyle = 'rgb(5,6,11)';
+        ctx.fillRect(0, 0, width, height);
+        if (reduceMotion) { fillStatic(); } else { requestAnimationFrame(step); }
+
+        // Scroll reveal
+        var revealEls = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window && !reduceMotion) {
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+                });
+            }, { threshold: 0.12 });
+            revealEls.forEach(function(el) { io.observe(el); });
+        } else {
+            revealEls.forEach(function(el) { el.classList.add('in-view'); });
         }
-        function drawDataPulses() {
-            for (var i = 0; i < 5; i++) {
-                var progress = ((time * 0.02 + i / 5) % 1);
-                var x = progress * width;
-                var y = height * 0.5 + Math.sin(x * 0.01 + time * 0.5) * 100;
-                var gradient = ctx.createRadialGradient(x, y, 0, x, y, 20);
-                gradient.addColorStop(0, 'rgba(0, 212, 170, 0.8)');
-                gradient.addColorStop(1, 'rgba(0, 212, 170, 0)');
-                ctx.beginPath();
-                ctx.arc(x, y, 10, 0, Math.PI * 2);
-                ctx.fillStyle = gradient;
-                ctx.fill();
-            }
-        }
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = '#0a0a0f';
-            ctx.fillRect(0, 0, width, height);
-            drawSignalWaves();
-            drawConnections();
-            for (var i = 0; i < nodes.length; i++) { nodes[i].update(); nodes[i].draw(); }
-            drawDataPulses();
-            time += 0.05;
-            requestAnimationFrame(animate);
-        }
-        window.addEventListener('resize', function() {
-            resize();
-            for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].x > width) nodes[i].x = Math.random() * width;
-                if (nodes[i].y > height) nodes[i].y = Math.random() * height;
-            }
+
+        // Mobile nav toggle
+        var toggle = document.getElementById('navToggle');
+        var panel = document.getElementById('mobilePanel');
+        toggle.addEventListener('click', function() {
+            var open = panel.classList.toggle('open');
+            toggle.classList.toggle('open', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
-        window.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
-        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                var target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        panel.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                panel.classList.remove('open');
+                toggle.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
             });
         });
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-        else init();
+
+        // Smooth anchor scroll
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); }
+            });
+        });
     })();
     </script>
 </body>
