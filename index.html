@@ -122,23 +122,57 @@
 
         /* Hero */
         .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8rem 4rem 3rem; position: relative; }
-        .hero-content { max-width: 800px; text-align: center; }
+        .hero-content { max-width: 920px; text-align: center; }
         .hero-eyebrow { justify-content: center; }
-        .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.75rem, 7vw, 5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 6vw, 3.85rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; white-space: nowrap; }
+        @media (max-width: 640px) { .hero-title { white-space: normal; font-size: clamp(2.1rem, 9vw, 2.75rem); } }
         .hero-title span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-subtitle { font-size: 1.15rem; color: var(--text-soft); margin-bottom: 2.25rem; max-width: 580px; margin-left: auto; margin-right: auto; }
-        .hero-tags { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
-        .tag {
-            padding: 0.4rem 1rem; background: rgba(138, 107, 255, 0.08); border: 1px solid rgba(138, 107, 255, 0.35);
-            border-radius: 100px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.03em; color: #c9befe;
-        }
-        .spectrogram-wrap { width: 100%; max-width: 920px; margin-top: 3.5rem; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; background: var(--panel); backdrop-filter: blur(10px); }
+        .spectrogram-wrap { width: 100%; max-width: 920px; margin-top: 2.5rem; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; background: var(--panel); backdrop-filter: blur(10px); }
         #spectrogram { width: 100%; height: 150px; display: block; border-radius: 4px; }
-        .waveform-caption {
-            display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace;
-            font-size: 0.66rem; letter-spacing: 0.08em; color: var(--text-faint); text-transform: uppercase; margin-top: 0.7rem;
+
+        /* Domain grid — bento block of research focus areas */
+        .domain-grid {
+            width: 100%; max-width: 920px; margin: 3.5rem auto 0;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
         }
-        .waveform-caption span:last-child { color: var(--cyan); }
+        .domain-tile {
+            aspect-ratio: 1; border-radius: 16px; border: 1px solid var(--border);
+            background: var(--panel); backdrop-filter: blur(10px);
+            text-align: left; position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+            transition: transform 0.35s cubic-bezier(.2,.8,.2,1), border-color 0.35s ease, box-shadow 0.35s ease;
+            opacity: 0; transform: translateY(14px) scale(0.97);
+            animation: tileIn 0.7s cubic-bezier(.2,.8,.2,1) forwards;
+        }
+        .domain-tile:nth-child(1) { animation-delay: 0.05s; }
+        .domain-tile:nth-child(2) { animation-delay: 0.12s; }
+        .domain-tile:nth-child(3) { animation-delay: 0.19s; }
+        .domain-tile:nth-child(4) { animation-delay: 0.26s; }
+        .domain-tile:nth-child(5) { animation-delay: 0.33s; }
+        .domain-tile:nth-child(6) { animation-delay: 0.40s; }
+        @keyframes tileIn { to { opacity: 1; transform: translateY(0) scale(1); } }
+        .domain-tile::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.16;
+            background: radial-gradient(circle at 25% 15%, var(--tile-color), transparent 65%);
+            transition: opacity 0.35s ease;
+        }
+        .domain-tile:hover { transform: translateY(-5px); border-color: var(--tile-color); box-shadow: 0 18px 40px -14px var(--tile-glow); }
+        .domain-tile:hover::before { opacity: 0.28; }
+        .domain-illustration {
+            flex: 1 1 auto; position: relative; display: flex; align-items: center; justify-content: center;
+            padding: 1.1rem 1.1rem 0; color: var(--tile-color); min-height: 0;
+        }
+        .domain-illustration::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: radial-gradient(var(--tile-color) 1px, transparent 1px);
+            background-size: 15px 15px; opacity: 0.1;
+        }
+        .domain-canvas { position: relative; width: 100%; height: 100%; display: block; transition: transform 0.4s ease; }
+        .domain-tile:hover .domain-canvas { transform: scale(1.04); }
+        .domain-body { padding: 0 1.2rem 1.2rem; position: relative; }
+        .domain-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.98rem; letter-spacing: -0.01em; }
+        .domain-desc { font-family: 'Inter', sans-serif; font-size: 0.76rem; color: var(--text-faint); margin-top: 0.35rem; line-height: 1.4; }
         .scroll-indicator {
             margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
             color: var(--text-faint); font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
@@ -294,11 +328,16 @@
             .pub-row { grid-template-columns: 1fr; gap: 0.5rem; }
             .contact-content { grid-template-columns: 1fr; }
             .playground-grid { grid-template-columns: 1fr 1fr; }
+            .domain-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 480px) {
-            .hero-tags { flex-direction: column; align-items: center; }
             .award-item { flex-direction: column; gap: 0.4rem; }
             .playground-grid { grid-template-columns: 1fr; }
+            .domain-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .domain-tile { border-radius: 12px; }
+            .domain-illustration { padding: 0.75rem 0.75rem 0; }
+            .domain-body { padding: 0 0.85rem 0.85rem; }
+            .domain-desc { display: none; }
         }
     </style>
 </head>
@@ -333,18 +372,52 @@
             <div class="eyebrow hero-eyebrow">AI Scientist — Thales Research &amp; Technology</div>
             <h1 class="hero-title">Damien <span>Martins Gomes</span></h1>
             <p class="hero-subtitle">I build speech and audio models that hold up on real hardware, under real constraints — turning degraded signals into intelligence, one waveform at a time.</p>
-            <div class="hero-tags">
-                <span class="tag">Speech Enhancement</span>
-                <span class="tag">Signal Processing</span>
-                <span class="tag">Deep Learning</span>
-                <span class="tag">Optimization</span>
-            </div>
         </div>
         <div class="spectrogram-wrap">
             <canvas id="spectrogram"></canvas>
-            <div class="waveform-caption">
-                <span>Live signal — synthetic mel-spectrogram</span>
-                <span>Neural speech enhancement</span>
+        </div>
+        <div class="domain-grid">
+            <div class="domain-tile" style="--tile-color: rgb(53,232,207); --tile-glow: rgba(53,232,207,0.16);">
+                <div class="domain-illustration"><canvas class="domain-canvas" data-draw="speech" data-color="53,232,207"></canvas></div>
+                <div class="domain-body">
+                    <div class="domain-title">Speech Enhancement</div>
+                    <div class="domain-desc">Denoising &amp; dereverberation, real-time on-device</div>
+                </div>
+            </div>
+            <div class="domain-tile" style="--tile-color: rgb(87,182,226); --tile-glow: rgba(87,182,226,0.16);">
+                <div class="domain-illustration"><canvas class="domain-canvas" data-draw="codec" data-color="87,182,226"></canvas></div>
+                <div class="domain-body">
+                    <div class="domain-title">Neural Audio Codecs</div>
+                    <div class="domain-desc">Ultra-low-bitrate compression for edge devices</div>
+                </div>
+            </div>
+            <div class="domain-tile" style="--tile-color: rgb(121,132,245); --tile-glow: rgba(121,132,245,0.16);">
+                <div class="domain-illustration"><canvas class="domain-canvas" data-draw="generation" data-color="121,132,245"></canvas></div>
+                <div class="domain-body">
+                    <div class="domain-title">Audio Generation</div>
+                    <div class="domain-desc">Flow matching &amp; foundation models</div>
+                </div>
+            </div>
+            <div class="domain-tile" style="--tile-color: rgb(161,98,234); --tile-glow: rgba(161,98,234,0.16);">
+                <div class="domain-illustration"><canvas class="domain-canvas" data-draw="fusion" data-color="161,98,234"></canvas></div>
+                <div class="domain-body">
+                    <div class="domain-title">Multimodal Fusion</div>
+                    <div class="domain-desc">Cross-modal signal representations</div>
+                </div>
+            </div>
+            <div class="domain-tile" style="--tile-color: rgb(208,79,191); --tile-glow: rgba(208,79,191,0.16);">
+                <div class="domain-illustration"><canvas class="domain-canvas" data-draw="tts" data-color="208,79,191"></canvas></div>
+                <div class="domain-body">
+                    <div class="domain-title">Text-to-Speech</div>
+                    <div class="domain-desc">Natural, low-latency voice synthesis</div>
+                </div>
+            </div>
+            <div class="domain-tile" style="--tile-color: rgb(255,61,148); --tile-glow: rgba(255,61,148,0.16);">
+                <div class="domain-illustration"><canvas class="domain-canvas" data-draw="asr" data-color="255,61,148"></canvas></div>
+                <div class="domain-body">
+                    <div class="domain-title">Audio Recognition</div>
+                    <div class="domain-desc">Robust ASR under real-world noise</div>
+                </div>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -748,6 +821,213 @@
         ctx.fillStyle = 'rgb(5,6,11)';
         ctx.fillRect(0, 0, width, height);
         if (reduceMotion) { fillStatic(); } else { requestAnimationFrame(step); }
+
+        // Domain grid — six small live illustrations, one per research area
+        var domainCanvases = Array.prototype.slice.call(document.querySelectorAll('.domain-canvas'));
+        var domainItems = domainCanvases.map(function(c) {
+            return { canvas: c, ctx: c.getContext('2d'), color: c.dataset.color, key: c.dataset.draw, w: 0, h: 0 };
+        });
+
+        function bez(p0, p1, p2, p3, u) {
+            var v = 1 - u, b0 = v*v*v, b1 = 3*v*v*u, b2 = 3*v*u*u, b3 = u*u*u;
+            return [b0*p0[0]+b1*p1[0]+b2*p2[0]+b3*p3[0], b0*p0[1]+b1*p1[1]+b2*p2[1]+b3*p3[1]];
+        }
+        function roundedRect(ctx2, x, y, w, h, r) {
+            ctx2.moveTo(x + r, y);
+            ctx2.arcTo(x + w, y, x + w, y + h, r);
+            ctx2.arcTo(x + w, y + h, x, y + h, r);
+            ctx2.arcTo(x, y + h, x, y, r);
+            ctx2.arcTo(x, y, x + w, y, r);
+            ctx2.closePath();
+        }
+        function domainSetup(ctx2, color, w, h) {
+            ctx2.clearRect(0, 0, w, h);
+            ctx2.save();
+            ctx2.scale(w / 260, h / 120);
+            ctx2.strokeStyle = 'rgb(' + color + ')';
+            ctx2.fillStyle = 'rgb(' + color + ')';
+            ctx2.lineCap = 'round';
+            ctx2.lineJoin = 'round';
+        }
+
+        var DOMAIN_DRAWERS = {
+            speech: function(ctx2, dt) {
+                ctx2.globalAlpha = 0.22; ctx2.lineWidth = 1.6;
+                ctx2.beginPath();
+                for (var x = 10; x <= 250; x += 4) {
+                    var y = 60 + Math.sin(x * 0.045 + dt * 0.6) * 10;
+                    if (x === 10) ctx2.moveTo(x, y); else ctx2.lineTo(x, y);
+                }
+                ctx2.stroke();
+                ctx2.globalAlpha = 1; ctx2.lineWidth = 2.1;
+                ctx2.beginPath();
+                for (var x2 = 10; x2 <= 250; x2 += 3) {
+                    var noiseAmt = Math.max(0, 1 - x2 / 95);
+                    var y2 = 60 + Math.sin(x2 * 0.045 + dt * 0.6) * 10 + Math.sin(x2 * 0.9 + dt * 7) * 12 * noiseAmt;
+                    if (x2 === 10) ctx2.moveTo(x2, y2); else ctx2.lineTo(x2, y2);
+                }
+                ctx2.stroke();
+                [[18,30],[30,85],[48,24],[62,88],[80,35]].forEach(function(p, i) {
+                    var flicker = 0.35 + 0.35 * Math.sin(dt * 3 + i * 1.7);
+                    ctx2.globalAlpha = Math.max(0, (0.7 - i * 0.13) * flicker);
+                    ctx2.beginPath(); ctx2.arc(p[0], p[1], 2 - i * 0.15, 0, Math.PI * 2); ctx2.fill();
+                });
+                ctx2.globalAlpha = 1;
+            },
+            codec: function(ctx2, dt) {
+                ctx2.globalAlpha = 1;
+                [[14,0],[30,1],[46,2],[62,3]].forEach(function(b, i) {
+                    var h = 25 + Math.abs(Math.sin(dt * (1.4 + i * 0.3) + i)) * 45;
+                    ctx2.fillRect(b[0], 90 - h, 10, h);
+                });
+                ctx2.lineWidth = 1.8;
+                ctx2.strokeRect(100, 30, 60, 60);
+                ctx2.globalAlpha = 0.6; ctx2.lineWidth = 1.3;
+                ctx2.beginPath(); ctx2.moveTo(114,45); ctx2.lineTo(146,45); ctx2.moveTo(114,58); ctx2.lineTo(146,58); ctx2.moveTo(114,71); ctx2.lineTo(132,71); ctx2.stroke();
+                ctx2.globalAlpha = 1;
+                [190, 204, 218].forEach(function(x, i) {
+                    var h = 10 + Math.abs(Math.sin(dt * (1.4 + i * 0.3) + i)) * 18;
+                    ctx2.fillRect(x, 78 - h, 8, h);
+                });
+                [[78,98],[162,182]].forEach(function(seg) {
+                    for (var k = 0; k < 2; k++) {
+                        var prog = (dt * 0.6 + k * 0.5) % 1;
+                        var x3 = seg[0] + (seg[1]-seg[0]) * prog;
+                        ctx2.globalAlpha = Math.sin(prog * Math.PI);
+                        ctx2.beginPath(); ctx2.arc(x3, 55, 1.8, 0, Math.PI*2); ctx2.fill();
+                    }
+                });
+                ctx2.globalAlpha = 1;
+            },
+            generation: function(ctx2, dt) {
+                var origins = [[20,25],[40,15],[18,55],[45,45],[30,75],[55,80]];
+                var end = [198, 62];
+                ctx2.lineWidth = 1.2;
+                origins.forEach(function(o, i) {
+                    var c1 = [o[0]+70, (o[1]+62)/2+5], c2 = [o[0]+150, (o[1]+62)/2];
+                    ctx2.globalAlpha = 0.28;
+                    ctx2.beginPath(); ctx2.moveTo(o[0], o[1]); ctx2.bezierCurveTo(c1[0],c1[1],c2[0],c2[1],end[0],end[1]); ctx2.stroke();
+                    ctx2.globalAlpha = 0.9;
+                    ctx2.beginPath(); ctx2.arc(o[0], o[1], 2, 0, Math.PI*2); ctx2.fill();
+                    var prog = (dt * 0.35 + i * 0.16) % 1;
+                    var pt = bez(o, c1, c2, end, prog);
+                    ctx2.globalAlpha = Math.sin(prog * Math.PI);
+                    ctx2.beginPath(); ctx2.arc(pt[0], pt[1], 2.2, 0, Math.PI*2); ctx2.fill();
+                });
+                ctx2.globalAlpha = 1;
+                var pulse = 1 + Math.sin(dt * 3) * 0.15;
+                ctx2.save(); ctx2.translate(198, 62); ctx2.scale(pulse, pulse);
+                ctx2.lineWidth = 1.7;
+                ctx2.beginPath();
+                ctx2.moveTo(0,-12); ctx2.lineTo(3,-2); ctx2.lineTo(13,0); ctx2.lineTo(3,2); ctx2.lineTo(0,12); ctx2.lineTo(-3,2); ctx2.lineTo(-13,0); ctx2.lineTo(-3,-2); ctx2.closePath();
+                ctx2.stroke();
+                ctx2.restore();
+                ctx2.lineWidth = 1.9;
+                ctx2.beginPath();
+                for (var x4 = 211; x4 <= 255; x4 += 2) {
+                    var y4 = 62 + Math.sin((x4-211) * 0.13 + dt * 2) * 10 * Math.min(1,(x4-211)/15);
+                    if (x4 === 211) ctx2.moveTo(x4,y4); else ctx2.lineTo(x4,y4);
+                }
+                ctx2.stroke();
+            },
+            fusion: function(ctx2, dt) {
+                var hub = [130, 92];
+                ctx2.globalAlpha = 1; ctx2.lineWidth = 1.6;
+                [[35,30],[130,22],[220,34]].forEach(function(n) { ctx2.beginPath(); ctx2.arc(n[0], n[1], 16, 0, Math.PI*2); ctx2.stroke(); });
+                ctx2.lineWidth = 1.3;
+                ctx2.beginPath(); ctx2.moveTo(28,30); ctx2.lineTo(31,24); ctx2.lineTo(34,36); ctx2.lineTo(37,22); ctx2.lineTo(40,30); ctx2.stroke();
+                ctx2.beginPath(); ctx2.moveTo(122,18); ctx2.lineTo(138,18); ctx2.moveTo(122,24); ctx2.lineTo(138,24); ctx2.moveTo(122,30); ctx2.lineTo(132,30); ctx2.stroke();
+                ctx2.beginPath(); ctx2.moveTo(208,34); ctx2.quadraticCurveTo(220,25,232,34); ctx2.quadraticCurveTo(220,43,208,34); ctx2.stroke();
+                ctx2.beginPath(); ctx2.arc(220,34,3,0,Math.PI*2); ctx2.stroke();
+                var glow = 0.35 + Math.sin(dt * 2.4) * 0.2;
+                ctx2.globalAlpha = glow;
+                ctx2.beginPath(); ctx2.arc(hub[0], hub[1], 26, 0, Math.PI*2); ctx2.stroke();
+                ctx2.globalAlpha = 1; ctx2.lineWidth = 1.8;
+                ctx2.beginPath(); ctx2.arc(hub[0], hub[1], 20, 0, Math.PI*2); ctx2.stroke();
+                var conns = [
+                    { from: [42,43], c1: [70,65], c2: [100,80], to: [116,87], phase: 0 },
+                    { from: [130,38], c1: [130,55], c2: [130,67], to: [130,72], phase: 0.33 },
+                    { from: [208,45], c1: [185,65], c2: [155,80], to: [144,87], phase: 0.66 }
+                ];
+                ctx2.lineWidth = 1.4;
+                conns.forEach(function(c) {
+                    ctx2.globalAlpha = 0.5;
+                    ctx2.beginPath(); ctx2.moveTo(c.from[0],c.from[1]); ctx2.bezierCurveTo(c.c1[0],c.c1[1],c.c2[0],c.c2[1],c.to[0],c.to[1]); ctx2.stroke();
+                    var prog = (dt * 0.5 + c.phase) % 1;
+                    var pt = bez(c.from, c.c1, c.c2, c.to, prog);
+                    ctx2.globalAlpha = Math.sin(prog * Math.PI);
+                    ctx2.beginPath(); ctx2.arc(pt[0], pt[1], 2, 0, Math.PI*2); ctx2.fill();
+                });
+                ctx2.globalAlpha = 1;
+            },
+            tts: function(ctx2, dt) {
+                ctx2.lineWidth = 1.9; ctx2.globalAlpha = 1;
+                ctx2.beginPath(); ctx2.moveTo(14,30); ctx2.lineTo(70,30); ctx2.moveTo(14,46); ctx2.lineTo(55,46); ctx2.moveTo(14,62); ctx2.lineTo(62,62); ctx2.stroke();
+                for (var k = 0; k < 3; k++) {
+                    var prog = (dt * 0.5 + k * 0.33) % 1;
+                    var x5 = 88 + prog * 60;
+                    ctx2.globalAlpha = Math.sin(prog * Math.PI) * 0.7;
+                    ctx2.beginPath(); ctx2.arc(x5, 46, 2 - k*0.2, 0, Math.PI*2); ctx2.fill();
+                }
+                ctx2.globalAlpha = 1; ctx2.lineWidth = 1.9;
+                ctx2.beginPath(); ctx2.moveTo(170,34); ctx2.lineTo(170,58); ctx2.lineTo(182,58); ctx2.lineTo(200,72); ctx2.lineTo(200,20); ctx2.lineTo(182,34); ctx2.closePath(); ctx2.stroke();
+                [[14,1.6,0],[20,1.4,0.5]].forEach(function(a) {
+                    var alpha = 0.35 + 0.4 * Math.abs(Math.sin(dt * 2.2 - a[2]));
+                    ctx2.globalAlpha = alpha; ctx2.lineWidth = a[1];
+                    ctx2.beginPath(); ctx2.arc(203, 46, a[0], -0.6, 0.6); ctx2.stroke();
+                });
+                ctx2.globalAlpha = 1;
+            },
+            asr: function(ctx2, dt) {
+                [[24,1.4,0],[34,1.4,0.5]].forEach(function(a) {
+                    var alpha = 0.3 + 0.4 * Math.abs(Math.sin(dt * 2.2 - a[2]));
+                    ctx2.globalAlpha = alpha; ctx2.lineWidth = a[1];
+                    ctx2.beginPath(); ctx2.arc(20, 58, a[0], 2.4, 3.9); ctx2.stroke();
+                });
+                ctx2.globalAlpha = 1; ctx2.lineWidth = 1.8;
+                ctx2.beginPath(); roundedRect(ctx2, 45, 30, 20, 34, 10); ctx2.stroke();
+                ctx2.lineWidth = 1.6;
+                ctx2.beginPath(); ctx2.arc(55, 50, 23, 0.35, Math.PI - 0.35); ctx2.stroke();
+                ctx2.beginPath(); ctx2.moveTo(55,73); ctx2.lineTo(55,84); ctx2.moveTo(43,84); ctx2.lineTo(67,84); ctx2.stroke();
+                for (var k2 = 0; k2 < 3; k2++) {
+                    var prog2 = (dt * 0.5 + k2 * 0.33) % 1;
+                    var x6 = 90 + prog2 * 55;
+                    ctx2.globalAlpha = Math.sin(prog2 * Math.PI) * 0.7;
+                    ctx2.beginPath(); ctx2.arc(x6, 46, 2 - k2*0.2, 0, Math.PI*2); ctx2.fill();
+                }
+                ctx2.globalAlpha = 1; ctx2.lineWidth = 2.1;
+                [[155,34,211],[155,50,196],[155,66,203]].forEach(function(l, i) {
+                    var prog3 = Math.max(0, Math.min(1, (dt * 0.5 - i * 0.25) % 1.6));
+                    var full = l[2] - l[0];
+                    ctx2.beginPath(); ctx2.moveTo(l[0], l[1]); ctx2.lineTo(l[0] + full * prog3, l[1]); ctx2.stroke();
+                });
+            }
+        };
+
+        domainItems.forEach(function(it) { it.draw = DOMAIN_DRAWERS[it.key]; });
+
+        function resizeDomains() {
+            domainItems.forEach(function(it) {
+                var rect = it.canvas.getBoundingClientRect();
+                it.w = Math.max(1, rect.width); it.h = Math.max(1, rect.height);
+                it.canvas.width = it.w; it.canvas.height = it.h;
+            });
+        }
+        resizeDomains();
+        window.addEventListener('resize', resizeDomains);
+
+        var td = 0;
+        function domainFrame() {
+            td += 0.018;
+            domainItems.forEach(function(it) {
+                if (!it.draw || !it.w) return;
+                domainSetup(it.ctx, it.color, it.w, it.h);
+                it.draw(it.ctx, td);
+                it.ctx.restore();
+            });
+            if (!reduceMotion) requestAnimationFrame(domainFrame);
+        }
+        if (domainItems.length) { if (reduceMotion) { domainFrame(); } else { requestAnimationFrame(domainFrame); } }
 
         // Scroll reveal
         var revealEls = document.querySelectorAll('.reveal');
